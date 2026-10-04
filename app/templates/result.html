@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج التحليل - نظام كشف DeepFake</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">
+                    <span class="logo-icon"><i class="fas fa-chart-line"></i></span>
+                    نتائج التحليل
+                </h1>
+                <p class="subtitle">معرف المهمة: {{ job_id }}</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="results-container">
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState">
+                    <div class="loading-spinner"></div>
+                    <h3>جاري تحميل النتائج...</h3>
+                    <p>يرجى الانتظار</p>
+                </div>
+
+                <!-- Results Content -->
+                <div class="results-content" id="resultsContent" style="display: none;">
+                    <!-- Summary Card -->
+                    <div class="summary-card">
+                        <h3>ملخص النتائج</h3>
+                        <div class="score-display">
+                            <div class="score-circle">
+                                <div class="score-value" id="realScore">0%</div>
+                                <div class="score-label">احتمال الحقيقة</div>
+                            </div>
+                            <div class="score-bars">
+                                <div class="score-bar">
+                                    <div class="bar-label">حقيقي</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill real" id="realBar"></div>
+                                    </div>
+                                    <div class="bar-value" id="realValue">0%</div>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="bar-label">مزيف</div>
+                                    <div class="bar-container">
+                                        <div class="bar-fill fake" id="fakeBar"></div>
+                                    </div>
+                                    <div class="bar-value" id="fakeValue">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Explanations -->
+                    <div class="explanations-card">
+                        <h3>تفاصيل التحليل</h3>
+                        <div class="explanations-list" id="explanationsList">
+                            <!-- Explanations will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Frame Analysis (for videos) -->
+                    <div class="frame-analysis-card" id="frameAnalysisCard" style="display: none;">
+                        <h3>تحليل الإطارات</h3>
+                        <div class="frame-chart" id="frameChart">
+                            <!-- Frame analysis chart will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Advanced Analysis -->
+                    <div class="advanced-analysis-card" id="advancedAnalysisCard" style="display: none;">
+                        <h3>التحليلات المتقدمة</h3>
+                        <div class="advanced-grid" id="advancedGrid">
+                            <!-- Advanced analysis results will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Artifacts -->
+                    <div class="artifacts-card" id="artifactsCard" style="display: none;">
+                        <h3>المرئيات</h3>
+                        <div class="artifacts-grid" id="artifactsGrid">
+                            <!-- Artifacts will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="results-actions">
+                        <button class="btn btn-secondary" id="downloadReport">
+                            <span class="btn-icon"><i class="fas fa-download"></i></span>
+                            تحميل التقرير
+                        </button>
+                        <a href="/" class="btn btn-primary">
+                            <span class="btn-icon"><i class="fas fa-redo"></i></span>
+                            تحليل جديد
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Error State -->
+                <div class="error-state" id="errorState" style="display: none;">
+                    <div class="error-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h3>خطأ في تحميل النتائج</h3>
+                    <p id="errorMessage"></p>
+                    <a href="/" class="btn btn-primary">العودة للصفحة الرئيسية</a>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 نظام كشف DeepFake - تحليل ذكي باستخدام الذكاء الاصطناعي</p>
+        </footer>
+    </div>
+
+    <script>
+        // Get job ID from URL or template
+        const jobId = '{{ job_id|e }}' || window.location.pathname.split('/').pop();
+        console.log('Job ID:', jobId);
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
