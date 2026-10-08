@@ -16,7 +16,7 @@ def create_app(config_class=None):
         config_class.init_app(app)
     else:
         # Default configuration
-        app.config['SECRET_KEY'] = 'deepfake-detection-secret-key-2024'
+        app.config['SECRET_KEY'] = ''
         app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024  # 500MB max file size
         app.config['UPLOAD_FOLDER'] = 'uploads'
         app.config['ANALYSIS_FOLDER'] = 'static/analysis'
